@@ -1,0 +1,28 @@
+name: calegmu
+description: A new Flutter project.
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=2.19.6 <3.0.0'
+
+dependencies:
+  cached_network_image: ^3.2.3
+  favicon: ^1.1.0
+  flutter:
+    sdk: flutter
+  flutter_html: ^2.2.1
+  http: ^0.13.6
+  iconly: ^1.0.1
+  url_launcher: ^6.1.11
+  youtube_player_flutter: ^8.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+  - images/
