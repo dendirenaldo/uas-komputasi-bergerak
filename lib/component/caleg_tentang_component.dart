@@ -107,40 +107,46 @@ class CalegTentangComponent extends StatelessWidget {
                 ),
               ],
             ),
+          if (listYoutube!.isNotEmpty) const SizedBox(height: 15),
           if (listYoutube!.isNotEmpty)
-            ...(listYoutube!.map(
-              (val) => Column(
-                key: ValueKey('${key.toString()}_${val['id']}'),
-                children: [
-                  const SizedBox(height: 15),
-                  InkWell(
-                    onTap: () => launchUrl(Uri.parse(val['url']), mode: LaunchMode.externalApplication),
-                    child: Ink(
-                      child: Container(
-                        clipBehavior: Clip.hardEdge,
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(18)),
-                        child: AspectRatio(
-                          aspectRatio: 16 / 9,
-                          child: Stack(
-                            children: [
-                              Image.network(
-                                'https://img.youtube.com/vi/${YoutubePlayer.convertUrlToId(val['url'])}/0.jpg',
-                                fit: BoxFit.cover,
-                                width: double.infinity,
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Wrap(
+                spacing: 10,
+                crossAxisAlignment: WrapCrossAlignment.start,
+                children: listYoutube!
+                    .map(
+                      (val) => InkWell(
+                        key: ValueKey('${key.toString()}_${val['id']}'),
+                        onTap: () => launchUrl(Uri.parse(val['url']), mode: LaunchMode.externalApplication),
+                        child: Ink(
+                          child: Container(
+                            width: width * 0.6,
+                            clipBehavior: Clip.hardEdge,
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(18)),
+                            child: AspectRatio(
+                              aspectRatio: 16 / 9,
+                              child: Stack(
+                                children: [
+                                  Image.network(
+                                    'https://img.youtube.com/vi/${YoutubePlayer.convertUrlToId(val['url'])}/0.jpg',
+                                    fit: BoxFit.cover,
+                                    width: double.infinity,
+                                  ),
+                                  const Align(
+                                    alignment: Alignment.center,
+                                    child: Icon(Icons.play_circle_rounded, size: 40, color: Colors.white),
+                                  ),
+                                ],
                               ),
-                              const Align(
-                                alignment: Alignment.center,
-                                child: Icon(Icons.play_circle_rounded, size: 40, color: Colors.white),
-                              ),
-                            ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                ],
+                    )
+                    .toList(),
               ),
-            )),
+            ),
         ],
       ),
     );
