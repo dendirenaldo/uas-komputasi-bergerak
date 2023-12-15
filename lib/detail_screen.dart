@@ -31,7 +31,6 @@ class _DetailScreenState extends State<DetailScreen> with SingleTickerProviderSt
   late bool isFinalisation;
   late bool isActive;
   late int nomorUrut;
-  late String? linkClaimCaleg;
   late String? provinsi;
   late double? rating;
   late int ratingGiven;
@@ -47,23 +46,6 @@ class _DetailScreenState extends State<DetailScreen> with SingleTickerProviderSt
   late String? token;
   late Widget? tabCurrent;
   late int key;
-
-  Future<void> getKonfigurasi() async {
-    if (mounted) setState(() => _isLoading = true);
-
-    final response = await http.get(
-      Uri.parse("https://backend.calegmu.com/konfigurasi?nama[]=link_claim_caleg"),
-    );
-    if (response.statusCode == 201 || response.statusCode == 200) {
-      final List<dynamic> responseBody = jsonDecode(response.body);
-
-      if (mounted) setState(() => linkClaimCaleg = responseBody[0]['nilai'] ?? '');
-    }
-
-    Future.delayed(const Duration(seconds: 3), () {
-      if (mounted) setState(() => _isLoading = false);
-    });
-  }
 
   Future<void> getCaleg() async {
     if (mounted) setState(() => _isLoading = true);
@@ -137,7 +119,6 @@ class _DetailScreenState extends State<DetailScreen> with SingleTickerProviderSt
   void initState() {
     super.initState();
     userId = 0;
-    linkClaimCaleg = '';
     gambar = 'https://backend.calegmu.com/account/foto-profil/default.png';
     partai = '';
     dapil = '';
